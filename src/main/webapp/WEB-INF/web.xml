@@ -25,7 +25,7 @@
      
     <filter-mapping>
       <filter-name>springSecurityFilterChain</filter-name>
-      <servlet-name>Spring MVC Servlet</servlet-name>
+      <servlet-name>routing</servlet-name>
     </filter-mapping>
 
     <!-- 
@@ -68,7 +68,7 @@
     -->
 
     <servlet>
-        <servlet-name>Spring MVC Servlet</servlet-name>
+        <servlet-name>routing</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -78,7 +78,7 @@
     </servlet>
         
     <servlet-mapping>
-        <servlet-name>Spring MVC Servlet</servlet-name>
+        <servlet-name>routing</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
 
@@ -89,7 +89,7 @@
     
     <filter-mapping>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <servlet-name>Spring MVC Servlet</servlet-name>
+        <servlet-name>routing</servlet-name>
     </filter-mapping>
 
     <!-- 
