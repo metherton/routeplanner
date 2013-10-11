@@ -14,9 +14,9 @@
     <h1>Route Advice Request</h1>
  
     <h:form>
-        <p><h:outputLabel value="Start Latitude" /><h:inputText /></p>
-        <p><h:outputLabel value="Start Longitude" /><h:inputText /></p>
-        <p><h:outputLabel value="Destination Latitude" /><h:inputText /></p>
+        <p><h:outputLabel value="Start Latitude" /><h:inputText value="#{routeAdviceRequest.startLatitude" /></p>
+        <p><h:outputLabel value="Start Longitude" /><h:inputText value="#{routeAdviceRequest.startLongitude" /></p>
+        <p><h:outputLabel value="Destination Latitude" /><h:inputText value="#{routeAdviceRequest.startLatitude" /></p>
         <p><h:outputLabel value="Destination Longitude" /><h:inputText /></p>
         <p>
             <h:commandButton value="Request" action="request">
