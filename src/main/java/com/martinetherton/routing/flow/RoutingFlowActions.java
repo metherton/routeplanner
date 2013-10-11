@@ -17,8 +17,9 @@ public class RoutingFlowActions {
         this.routingService = routingService;
     }
     
-    public void requestRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
+    public int requestRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
         routingService.triggerRouteAdviceCreationFor(routeAdviceRequest);
+        return routeAdviceRequest.getRouteRequestId();
     }
     
     public RouteAdvice showRouteAdvice(RouteAdviceRequest routeAdviceRequest) {

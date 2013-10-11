@@ -5,11 +5,12 @@
 	parent="parent-flow">
 
 	<var name="routeAdviceRequest" class="com.martinetherton.routing.domain.RouteAdviceRequest"/>
- 
 
 	<view-state id="view">
 		<transition on="request" >
-			<evaluate expression="routingFlowActions.requestRouteAdvice(routeAdviceRequest)" />
+			<evaluate expression="routingFlowActions.requestRouteAdvice(routeAdviceRequest)"
+			result="viewScope.routeAdviceRequestId"
+			 />
 		</transition>	
 	</view-state>
 

@@ -14,6 +14,11 @@
     <h1>Route Advice Request</h1>
  
     <h:form>
+    			<h:panelGroup layout="block" styleClass="success" rendered="${not empty routeAdviceRequestId}">
+				<h:outputLabel for="email">Route Advice Request Id: </h:outputLabel>
+				<h:outputText id="email" value="${routeAdviceRequestId}"/>
+				</h:panelGroup>
+			
         <p><h:outputLabel value="Start Latitude" /><h:inputText value="#{routeAdviceRequest.startLatitude}"  /></p>
         <p><h:outputLabel value="Start Longitude" /><h:inputText  value="#{routeAdviceRequest.startLongitude}" /></p>
         <p><h:outputLabel value="Destination Latitude" /><h:inputText value="#{routeAdviceRequest.destinationLatitude}" /></p>
