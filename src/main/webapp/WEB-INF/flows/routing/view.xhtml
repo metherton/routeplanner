@@ -9,19 +9,19 @@
 <ui:define name="title">Route Advice Request</ui:define>
 
 <ui:define name="notes">
-here are the notes
+
 </ui:define>
 
 <ui:define name="content">
 	<h:form>
 		<fieldset>
-			<legend>User Details</legend>
+			<legend>Route Details</legend>
 			<h:panelGroup layout="block" styleClass="error" rendered="#{facesHelper.error}">
 				<h:messages />
 			</h:panelGroup>
 			<h:panelGroup layout="block" styleClass="success" rendered="${not empty routeAdviceRequestId}">
-				<h:outputLabel for="email">Route Advice Request Id: </h:outputLabel>
-				<h:outputText id="email" value="${routeAdviceRequestId}"/>
+				<h:outputLabel for="routeAdviceRequestId">Route Advice Request Id: </h:outputLabel>
+				<h:outputText id="routeAdviceRequestId" value="${routeAdviceRequestId}"/>
 			</h:panelGroup>
 	        <p><h:outputLabel for="startLatitude" value="Start Latitude" /><h:inputText id="startLatitude" value="#{routeAdviceRequest.startLatitude}"  /></p>
 	        <p><h:outputLabel for="startLongitude"  value="Start Longitude" /><h:inputText id="startLongitude"  value="#{routeAdviceRequest.startLongitude}" /></p>
@@ -34,6 +34,7 @@ here are the notes
 	        </p>						
 		</fieldset>
 	</h:form>
+ 
 </ui:define>
 
 </ui:composition>	
