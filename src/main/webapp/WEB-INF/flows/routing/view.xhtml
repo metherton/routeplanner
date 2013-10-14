@@ -1,34 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:sf="http://www.springframework.org/tags/faces">
- 
-<h:head>
-</h:head>
-<h:body>
-    <h1>Route Advice Request</h1>
- 
-    <h:form>
-    			<h:panelGroup layout="block" styleClass="success" rendered="${not empty routeAdviceRequestId}">
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/layouts/standard.xhtml">
+	
+<ui:define name="title">Route Advice Request</ui:define>
+
+<ui:define name="notes">
+here are the notes
+</ui:define>
+
+<ui:define name="content">
+	<h:form>
+		<fieldset>
+			<legend>User Details</legend>
+			<h:panelGroup layout="block" styleClass="error" rendered="#{facesHelper.error}">
+				<h:messages />
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="success" rendered="${not empty routeAdviceRequestId}">
 				<h:outputLabel for="email">Route Advice Request Id: </h:outputLabel>
 				<h:outputText id="email" value="${routeAdviceRequestId}"/>
-				</h:panelGroup>
-			
-        <p><h:outputLabel value="Start Latitude" /><h:inputText value="#{routeAdviceRequest.startLatitude}"  /></p>
-        <p><h:outputLabel value="Start Longitude" /><h:inputText  value="#{routeAdviceRequest.startLongitude}" /></p>
-        <p><h:outputLabel value="Destination Latitude" /><h:inputText value="#{routeAdviceRequest.destinationLatitude}" /></p>
-        <p><h:outputLabel value="Destination Longitude" /><h:inputText value="#{routeAdviceRequest.destinationLongitude}" /></p>
-        <p>
-            <h:commandButton value="Request" action="request">
-                <f:ajax execute="@form" render="@form" />
-            </h:commandButton>
-        </p>
-    </h:form>
+			</h:panelGroup>
+	        <p><h:outputLabel for="startLatitude" value="Start Latitude" /><h:inputText id="startLatitude" value="#{routeAdviceRequest.startLatitude}"  /></p>
+	        <p><h:outputLabel for="startLongitude"  value="Start Longitude" /><h:inputText id="startLongitude"  value="#{routeAdviceRequest.startLongitude}" /></p>
+	        <p><h:outputLabel for="destinationLatitude" value="Destination Latitude" /><h:inputText id="destinationLatitude" value="#{routeAdviceRequest.destinationLatitude}" /></p>
+	        <p><h:outputLabel for="destinationLongitude" value="Destination Longitude" /><h:inputText id="destinationLongitude" value="#{routeAdviceRequest.destinationLongitude}" /></p>
+	        <p>
+	            <h:commandButton value="Request" action="request">
+	                <f:ajax execute="@form" render="@form" />
+	            </h:commandButton>
+	        </p>						
+		</fieldset>
+	</h:form>
+</ui:define>
 
-</h:body>
-</html>
+</ui:composition>	
