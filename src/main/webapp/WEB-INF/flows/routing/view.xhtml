@@ -28,7 +28,7 @@ here are the notes
 	        <p><h:outputLabel for="destinationLatitude" value="Destination Latitude" /><h:inputText id="destinationLatitude" value="#{routeAdviceRequest.destinationLatitude}" /></p>
 	        <p><h:outputLabel for="destinationLongitude" value="Destination Longitude" /><h:inputText id="destinationLongitude" value="#{routeAdviceRequest.destinationLongitude}" /></p>
 	        <p>
-	            <h:commandButton value="Request" action="request">
+	            <h:commandButton id="requestRoute" value="Request" action="request">
 	                <f:ajax execute="@form" render="@form" />
 	            </h:commandButton>
 	        </p>						
