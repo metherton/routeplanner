@@ -1,5 +1,7 @@
 package com.martinetherton.routing.persistence;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,13 @@ public class RouteAdviceRequestDaoImpl implements RouteAdviceRequestDao {
 //    @Override
     public RouteAdviceRequest findRouteAdviceRequestWithId(int id) {
         return (RouteAdviceRequest)currentSession().get(RouteAdviceRequest.class, id);
-    }    
+    }
+
+	@Override
+	public List<RouteAdviceRequest> findAllRouteAdviceRequests() {
+		List<RouteAdviceRequest> results = (List<RouteAdviceRequest>)currentSession().createCriteria(RouteAdviceRequest.class).list();
+		System.out.println(results.size());
+		return results;
+	}    
     
 }

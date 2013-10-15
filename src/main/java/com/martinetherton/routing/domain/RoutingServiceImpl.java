@@ -1,8 +1,10 @@
 package com.martinetherton.routing.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.model.DataModel;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
@@ -18,8 +20,8 @@ import com.bmtargoss.semafors.optimizer.domain.OptimizerService;
 import com.martinetherton.routing.persistence.RouteAdviceDao;
 import com.martinetherton.routing.persistence.RouteAdviceRequestDao;
 
-@Service
-public class RoutingServiceImpl implements RoutingService {
+@Service("routingService")
+public class RoutingServiceImpl implements RoutingService, Serializable {
 
     private RouteAdviceRequestDao routeAdviceRequestDao;
     private RouteAdviceDao routeAdviceDao;
@@ -97,5 +99,11 @@ public class RoutingServiceImpl implements RoutingService {
         RouteAdvice routeAdvice = routeAdviceDao.findRouteAdviceFor(routeAdviceRequest);
         return routeAdvice;
     }
+
+	@Override
+	public List<RouteAdviceRequest> findAllRouteAdviceRequests() {
+		return routeAdviceRequestDao.findAllRouteAdviceRequests();
+	}
+
 
 }

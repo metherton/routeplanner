@@ -6,6 +6,9 @@
 	<var name="routeAdviceRequest" class="com.martinetherton.routing.domain.RouteAdviceRequest"/>
 
 	<view-state id="view">
+		<on-entry>
+			<evaluate expression="routingService.findAllRouteAdviceRequests()" result="viewScope.routeAdviceRequests" result-type="dataModel" />
+		</on-entry>	
 		<transition on="request" >
 			<evaluate expression="routingFlowActions.requestRouteAdvice(routeAdviceRequest)"
 			result="viewScope.routeAdviceRequestId"
