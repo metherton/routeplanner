@@ -14,7 +14,7 @@ public class RouteAdviceRequestHandlerTest {
         RoutingService routingService = createMock(RoutingService.class);
         RouteAdviceRequestHandlerImpl routeAdviceRequestHandler = new RouteAdviceRequestHandlerImpl(routingService);
         
-        routingService.requestRouteAdviceFor(42);
+        routingService.requestRouteAdviceFor(42L);
         
         replay(routingService);
         routeAdviceRequestHandler.processRouteAdviceRequest("42");

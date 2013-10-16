@@ -23,7 +23,7 @@ public class RoutingServiceTest {
     public void saveRouteAdviceRequestInvokedOnRoutingPersistenceDAO() {
         
         RouteAdviceRequest routeAdviceRequest = new RouteAdviceRequest();
-        routeAdviceRequest.setRouteRequestId(42);
+        routeAdviceRequest.setId(42L);
         
         RouteAdviceRequestDao routeAdviceRequestDao = EasyMock.createMock(RouteAdviceRequestDao.class);
         JmsTemplate jmsTemplate = EasyMock.createMock(JmsTemplate.class);
@@ -41,7 +41,7 @@ public class RoutingServiceTest {
     public void optimizerInvokedWithCorrectRouteRequestInformation() {
         
         RouteAdviceRequest routeAdviceRequest = new RouteAdviceRequest();
-        routeAdviceRequest.setRouteRequestId(42);
+        routeAdviceRequest.setId(42L);
         routeAdviceRequest.setStartLongitude("23");
         routeAdviceRequest.setStartLatitude("44");
         routeAdviceRequest.setDestinationLongitude("22");
@@ -59,7 +59,7 @@ public class RoutingServiceTest {
 
         RoutingService routingService = new RoutingServiceImpl(routeAdviceRequestDao, jmsTemplate, optimizerService, routeAdviceDao);
 
-        expect(routeAdviceRequestDao.findRouteAdviceRequestWithId(42)).andReturn(routeAdviceRequest);
+        expect(routeAdviceRequestDao.findRouteAdviceRequestWithId(42L)).andReturn(routeAdviceRequest);
         OptimalRouteAdviceRequest optimalRouteAdviceRequest = new OptimalRouteAdviceRequest("23_44", "22_45");
         OptimalRouteAdvice optimalRouteAdvice = new OptimalRouteAdvice(new ArrayList<String>(), 0, 0, 0, 0);
         
@@ -68,7 +68,7 @@ public class RoutingServiceTest {
         
         
         replay(routeAdviceRequestDao, optimizerService, routeAdviceDao);
-        routingService.requestRouteAdviceFor(42);
+        routingService.requestRouteAdviceFor(42L);
         verify(routeAdviceRequestDao, optimizerService, routeAdviceDao);
     }
     

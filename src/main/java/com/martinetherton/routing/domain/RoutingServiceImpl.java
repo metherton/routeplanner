@@ -41,18 +41,15 @@ public class RoutingServiceImpl implements RoutingService, Serializable {
 
         jmsTemplate.send(new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
-                return session.createObjectMessage(String.valueOf(routeAdviceRequest.getRouteRequestId()));
+                return session.createObjectMessage(String.valueOf(routeAdviceRequest.getId()));
             }
         }
         );        
     }
 
-    public void requestRouteAdviceFor(int routeAdviceRequestId) {
-        routeAdviceDao.storeRouteAdvice(optimalRouteAdviceFor(getStoredRouteAdviceRequestFor(routeAdviceRequestId)));
-    }
 
-    private RouteAdviceRequest getStoredRouteAdviceRequestFor(int routeAdviceRequestId) {
-        return routeAdviceRequestDao.findRouteAdviceRequestWithId(routeAdviceRequestId);
+    private RouteAdviceRequest getStoredRouteAdviceRequestFor(Long id) {
+        return routeAdviceRequestDao.findRouteAdviceRequestWithId(id);
     }
 
     private RouteAdvice optimalRouteAdviceFor(
@@ -106,6 +103,11 @@ public class RoutingServiceImpl implements RoutingService, Serializable {
 	    System.out.println(results.size());
 		return results;
 	}
+
+    @Override
+    public void requestRouteAdviceFor(Long id) {
+        routeAdviceDao.storeRouteAdvice(optimalRouteAdviceFor(getStoredRouteAdviceRequestFor(id)));
+    }
 
 
 }

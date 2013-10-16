@@ -16,7 +16,7 @@ public class RouteAdviceRequestHandlerImpl implements RouteAdviceRequestHandler 
     }
 
     public void processRouteAdviceRequest(String routeRequestAdviceId) {
-        routingService.requestRouteAdviceFor(parseInt(routeRequestAdviceId));
+        routingService.requestRouteAdviceFor(Long.parseLong(routeRequestAdviceId));
     }
 
 }

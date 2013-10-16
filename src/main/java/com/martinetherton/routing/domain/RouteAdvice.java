@@ -77,34 +77,32 @@ public class RouteAdvice implements Serializable {
         
     
     @Id
-    @Column(name="route_advice_id", columnDefinition = "bigint")
+    @Column(name="id", columnDefinition = "bigint")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int routeAdviceId;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "route_request_id", nullable = false, updatable = false)
     private RouteAdviceRequest routeAdviceRequest;    
     
-    @Column(name="start", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="start", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String start;
 
-    @Column(name="destination", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="destination", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String destination;
    
     @OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name="route_advice_id")
     private List<RouteAdviceLeg> routeAdviceLegs;    
     
-    public int getRouteAdviceId() {
-        
-        return routeAdviceId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRouteAdviceId(int routeAdviceId) {
-    
-        this.routeAdviceId = routeAdviceId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public RouteAdviceRequest getRouteAdviceRequest() {
@@ -116,22 +114,18 @@ public class RouteAdvice implements Serializable {
     }
     
     public String getStart() {
-    
         return start;
     }
  
     public void setStart(String start) {
-        
         this.start = start;
     }    
    
     public String getDestination() {
-        
         return destination;
     }
  
     public void setDestination(String destination) {
-        
         this.destination = destination;
     }      
     
@@ -145,7 +139,6 @@ public class RouteAdvice implements Serializable {
 
     @Override
     public int hashCode() {
-
         final int prime = 31;
         int result = 1;
         result = prime * result
@@ -156,7 +149,6 @@ public class RouteAdvice implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-
         if (this == obj)
             return true;
         if (obj == null)

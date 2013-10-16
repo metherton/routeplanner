@@ -17,13 +17,13 @@ public class RoutingFlowActions {
         this.routingService = routingService;
     }
     
-    public int requestRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
+    public Long requestRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
         routingService.triggerRouteAdviceCreationFor(routeAdviceRequest);
-        return routeAdviceRequest.getRouteRequestId();
+        return routeAdviceRequest.getId();
     }
     
     public RouteAdvice showRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
-        System.out.println("requested route advice for " + routeAdviceRequest.getRouteRequestId());
+        System.out.println("requested route advice for " + routeAdviceRequest.getId());
        // routingService.initiateRequest(routeAdviceRequest);
         return routingService.routeAdviceFor(routeAdviceRequest);
     }    

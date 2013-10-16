@@ -5,17 +5,14 @@
 
 	<var name="routeAdviceRequest" class="com.martinetherton.routing.domain.RouteAdviceRequest"/>
 
-	<view-state id="view1">
+	<view-state id="view">
 		<on-render>
-			<evaluate expression="routingService.findAllRouteAdviceRequests()" result="viewScope.routeAdviceRequests1" result-type="org.springframework.faces.model.ManySelectionTrackingListDataModel" />
+			<evaluate expression="routingService.findAllRouteAdviceRequests()" result="viewScope.routeAdviceRequests" result-type="dataModel" />
 		</on-render>	
-		<!-- 
 		<transition on="request" >
-			<evaluate expression="routingFlowActions.requestRouteAdvice(routeAdviceRequest)"
-			result="viewScope.routeAdviceRequestId"
-			 />
+			<evaluate expression="routingFlowActions.requestRouteAdvice(routeAdviceRequest)" result="viewScope.id"/>
 		</transition>
-		 -->	
+		
 	</view-state>
 
 </flow>

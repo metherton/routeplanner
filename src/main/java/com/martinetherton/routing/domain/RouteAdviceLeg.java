@@ -21,32 +21,30 @@ public class RouteAdviceLeg implements Serializable {
     }
     
     @Id
-    @Column(name="route_advice_leg_id", columnDefinition = "bigint")
+    @Column(name="id", columnDefinition = "bigint")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int routeAdviceLegId;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name = "route_advice_id", nullable = false, updatable = false)
     private RouteAdvice routeAdvice;
     
-    @Column(name="location", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="location", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String location;
     
     @Column(name="sort_order", columnDefinition = "bigint")
     private int sortOrder;    
     
-    public int getRouteAdviceLegId() {
-        return routeAdviceLegId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRouteAdviceLegId(int routeAdviceLegId) {
-    
-        this.routeAdviceLegId = routeAdviceLegId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public RouteAdvice getRouteAdvice() {
-        
         return routeAdvice;
     }
 
@@ -55,15 +53,12 @@ public class RouteAdviceLeg implements Serializable {
     }    
 
     public int getSortOrder() {
-        
         return sortOrder;
     }
 
     public void setSortOrder(int sortOrder) {
-    
         this.sortOrder = sortOrder;
     }
-    
     
     public String getLocation() {
         return location;

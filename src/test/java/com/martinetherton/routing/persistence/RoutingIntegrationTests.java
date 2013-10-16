@@ -27,7 +27,7 @@ public class RoutingIntegrationTests {
     
     @Test
     public void testDbConnection() {
-        RouteAdviceRequest routeAdviceRequest = routeAdviceRequestDao.findRouteAdviceRequestWithId(7);
+        RouteAdviceRequest routeAdviceRequest = routeAdviceRequestDao.findRouteAdviceRequestWithId(7L);
         Assert.assertThat(routeAdviceRequest.getStartLatitude(), Matchers.is("1"));
     }
 

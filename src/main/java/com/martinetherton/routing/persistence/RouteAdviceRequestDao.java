@@ -8,7 +8,7 @@ public interface RouteAdviceRequestDao {
 
     public void storeRouteAdviceRequest(RouteAdviceRequest routeAdviceRequest);
 
-    public RouteAdviceRequest findRouteAdviceRequestWithId(int id);
+    public RouteAdviceRequest findRouteAdviceRequestWithId(Long id);
 
 	public List<RouteAdviceRequest> findAllRouteAdviceRequests();
 

@@ -9,7 +9,7 @@ public interface RoutingService {
 
     public void triggerRouteAdviceCreationFor(RouteAdviceRequest routeAdviceRequest);
 
-    public void requestRouteAdviceFor(int routeAdviceRequestId);
+    public void requestRouteAdviceFor(Long id);
 
     public RouteAdvice routeAdviceFor(RouteAdviceRequest routeAdviceRequest);
     

@@ -16,83 +16,71 @@ public class RouteAdviceRequest implements Serializable {
 
     @Override
     public String toString() {
-
-        return "RouteAdviceRequest [id=" + routeRequestId + ", startLatitude="
+        return "RouteAdviceRequest [id=" + id + ", startLatitude="
                 + startLatitude + ", startLongitude=" + startLongitude
                 + ", destinationLatitude=" + destinationLatitude
                 + ", destinationLongitude=" + destinationLongitude + "]";
     }
 
-    public int getRouteRequestId() {
-    
-        return routeRequestId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRouteRequestId(int routeRequestId) {
-    
-        this.routeRequestId = routeRequestId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getStartLatitude() {
-    
         return startLatitude;
     }
 
     public void setStartLatitude(String startLatitude) {
-    
         this.startLatitude = startLatitude;
     }
 
     public String getStartLongitude() {
-    
         return startLongitude;
     }
 
     public void setStartLongitude(String startLongitude) {
-    
         this.startLongitude = startLongitude;
     }
 
     public String getDestinationLatitude() {
-    
         return destinationLatitude;
     }
 
     public void setDestinationLatitude(String destinationLatitude) {
-    
         this.destinationLatitude = destinationLatitude;
     }
 
     public String getDestinationLongitude() {
-    
         return destinationLongitude;
     }
 
     public void setDestinationLongitude(String destinationLongitude) {
-    
         this.destinationLongitude = destinationLongitude;
     }
 
     @Id
-    @Column(name="route_request_id", columnDefinition = "bigint")
+    @Column(name="id", columnDefinition = "bigint")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int routeRequestId;
+    private Long id;
 
-    @Column(name="start_latitude", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="start_latitude", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String startLatitude;
 
-    @Column(name="start_longitude", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="start_longitude", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String startLongitude;
 
-    @Column(name="destination_latitude", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="destination_latitude", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String destinationLatitude;
 
-    @Column(name="destination_longitude", columnDefinition = "varchar")
-    @Size(min=1, max=255, message = "The first name must be between 1 and 50 characters long.")
+    @Column(name="destination_longitude", columnDefinition = "char")
+    @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
     private String destinationLongitude;
-    
     
 }

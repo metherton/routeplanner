@@ -32,7 +32,7 @@ public class RouteAdviceRequestDaoImpl implements RouteAdviceRequestDao {
     }
 
 //    @Override
-    public RouteAdviceRequest findRouteAdviceRequestWithId(int id) {
+    public RouteAdviceRequest findRouteAdviceRequestWithId(Long id) {
         return (RouteAdviceRequest)currentSession().get(RouteAdviceRequest.class, id);
     }
 
