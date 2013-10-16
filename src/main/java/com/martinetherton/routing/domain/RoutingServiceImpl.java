@@ -102,7 +102,9 @@ public class RoutingServiceImpl implements RoutingService, Serializable {
 
 	@Override
 	public List<RouteAdviceRequest> findAllRouteAdviceRequests() {
-		return routeAdviceRequestDao.findAllRouteAdviceRequests();
+	    List<RouteAdviceRequest> results = routeAdviceRequestDao.findAllRouteAdviceRequests();
+	    System.out.println(results.size());
+		return results;
 	}
 
 
