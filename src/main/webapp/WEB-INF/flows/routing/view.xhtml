@@ -1,0 +1,74 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/layouts/standard.xhtml">
+	
+<ui:define name="title">Route Advice Request</ui:define>
+
+<ui:define name="notes">
+
+</ui:define>
+
+<ui:define name="content">
+	<h:form>
+		<fieldset>
+			<legend>Route Details</legend>
+			<h:panelGroup layout="block" styleClass="error" rendered="#{facesHelper.error}">
+				<h:messages />
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="success" rendered="${not empty routeAdviceRequestId}">
+				<h:outputLabel for="routeAdviceRequestId">Route Advice Request Id: </h:outputLabel>
+				<h:outputText id="routeAdviceRequestId" value="${routeAdviceRequestId}"/>
+			</h:panelGroup>
+	        <p><h:outputLabel for="startLatitude" value="Start Latitude" /><h:inputText id="startLatitude" value="#{routeAdviceRequest.startLatitude}"  /></p>
+	        <p><h:outputLabel for="startLongitude"  value="Start Longitude" /><h:inputText id="startLongitude"  value="#{routeAdviceRequest.startLongitude}" /></p>
+	        <p><h:outputLabel for="destinationLatitude" value="Destination Latitude" /><h:inputText id="destinationLatitude" value="#{routeAdviceRequest.destinationLatitude}" /></p>
+	        <p><h:outputLabel for="destinationLongitude" value="Destination Longitude" /><h:inputText id="destinationLongitude" value="#{routeAdviceRequest.destinationLongitude}" /></p>
+	        <p>
+	            <h:commandButton id="requestRoute" value="Request" action="request">
+	                <f:ajax execute="@form" render="@form" />
+	            </h:commandButton>
+	        </p>						
+		</fieldset>
+	</h:form>
+
+	<p:panel id="routeAdviceRequests" header="Your RouteAdvice Requests" rendered="#{true}" toggleable="true" toggleSpeed="100" style="margin-top: 10px">
+		
+        <h:outputText value="#{routeAdviceRequests.rowCount}" rendered="#{routeAdviceRequests.rowCount==0}"/>
+		<h:form rendered="#{routeAdviceRequests.rowCount > 0}">
+			<h:panelGroup id="contentPanel" layout="block" styleClass="notice">
+            <p:outputPanel id="routeAdviceRequestsContent">
+				<p:dataTable value="#{routeAdviceRequests}" var="route_request">
+                    <p:column>
+                        <f:facet name="header">Route Advice Request Id</f:facet>
+                        #{route_request.id}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Start Latitude</f:facet>
+                        #{route_request.startLatitude}
+                    </p:column>     
+                    <p:column>
+                        <f:facet name="header">Start Longitude</f:facet>
+                        #{route_request.startLongitude}
+                    </p:column>  
+                    <p:column>
+                        <f:facet name="header">Destination Latitude</f:facet>
+                        #{route_request.destinationLatitude}
+                    </p:column>  
+                    <p:column>
+                        <f:facet name="header">Destination Longitude</f:facet>
+                        #{route_request.destinationLongitude}
+                    </p:column>                                                                            
+				</p:dataTable>
+			</p:outputPanel>
+            </h:panelGroup>
+            <p:poll widgetVar="routing" interval="600" update="contentPanel" autoStart="true" />
+		</h:form>			  
+	</p:panel>	
+ 
+</ui:define>
+
+</ui:composition>	
