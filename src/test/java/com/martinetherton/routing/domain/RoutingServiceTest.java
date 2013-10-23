@@ -14,7 +14,6 @@ import org.springframework.jms.core.JmsTemplate;
 import com.bmtargoss.semafors.optimizer.domain.OptimalRouteAdvice;
 import com.bmtargoss.semafors.optimizer.domain.OptimalRouteAdviceRequest;
 import com.bmtargoss.semafors.optimizer.domain.OptimizerService;
-import com.martinetherton.routing.persistence.RouteAdviceDao;
 import com.martinetherton.routing.persistence.RouteAdviceRequestDao;
 
 public class RoutingServiceTest {
@@ -28,7 +27,7 @@ public class RoutingServiceTest {
         RouteAdviceRequestDao routeAdviceRequestDao = EasyMock.createMock(RouteAdviceRequestDao.class);
         JmsTemplate jmsTemplate = EasyMock.createMock(JmsTemplate.class);
 
-        RoutingService routingService = new RoutingServiceImpl(routeAdviceRequestDao, jmsTemplate, null, null);
+        RoutingService routingService = new RoutingServiceImpl(routeAdviceRequestDao, jmsTemplate, null);
 
         routeAdviceRequestDao.storeRouteAdviceRequest(routeAdviceRequest);
         
@@ -47,29 +46,29 @@ public class RoutingServiceTest {
         routeAdviceRequest.setDestinationLongitude("22");
         routeAdviceRequest.setDestinationLatitude("45");
         
-        RouteAdvice routeAdvice = new RouteAdvice();
-        routeAdvice.setStart("23_44");
-        routeAdvice.setDestination("22_45");
+//        RouteAdvice routeAdvice = new RouteAdvice();
+//        routeAdvice.setStart("23_44");
+//        routeAdvice.setDestination("22_45");
         
         RouteAdviceRequestDao routeAdviceRequestDao = createMock(RouteAdviceRequestDao.class);
-        RouteAdviceDao routeAdviceDao = createMock(RouteAdviceDao.class);
+//        RouteAdviceDao routeAdviceDao = createMock(RouteAdviceDao.class);
 
         JmsTemplate jmsTemplate = createMock(JmsTemplate.class);
         OptimizerService optimizerService = createMock(OptimizerService.class);
 
-        RoutingService routingService = new RoutingServiceImpl(routeAdviceRequestDao, jmsTemplate, optimizerService, routeAdviceDao);
+        RoutingService routingService = new RoutingServiceImpl(routeAdviceRequestDao, jmsTemplate, optimizerService);
 
         expect(routeAdviceRequestDao.findRouteAdviceRequestWithId(42L)).andReturn(routeAdviceRequest);
         OptimalRouteAdviceRequest optimalRouteAdviceRequest = new OptimalRouteAdviceRequest("23_44", "22_45");
         OptimalRouteAdvice optimalRouteAdvice = new OptimalRouteAdvice(new ArrayList<String>(), 0, 0, 0, 0);
         
         expect(optimizerService.findRouteAdviceFor(optimalRouteAdviceRequest)).andReturn(optimalRouteAdvice);
-        routeAdviceDao.storeRouteAdvice(routeAdvice);        
+        routeAdviceRequestDao.storeRouteAdviceRequest(routeAdviceRequest);        
         
         
-        replay(routeAdviceRequestDao, optimizerService, routeAdviceDao);
+        replay(routeAdviceRequestDao, optimizerService);
         routingService.requestRouteAdviceFor(42L);
-        verify(routeAdviceRequestDao, optimizerService, routeAdviceDao);
+        verify(routeAdviceRequestDao, optimizerService);
     }
     
 }

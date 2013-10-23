@@ -3,7 +3,6 @@ package com.martinetherton.routing.flow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.martinetherton.routing.domain.RouteAdvice;
 import com.martinetherton.routing.domain.RouteAdviceRequest;
 import com.martinetherton.routing.domain.RoutingService;
 
@@ -22,9 +21,10 @@ public class RoutingFlowActions {
         return routeAdviceRequest.getId();
     }
     
-    public RouteAdvice showRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
+    public RouteAdviceRequest showRouteAdvice(RouteAdviceRequest routeAdviceRequest) {
         System.out.println("requested route advice for " + routeAdviceRequest.getId());
        // routingService.initiateRequest(routeAdviceRequest);
-        return routingService.routeAdviceFor(routeAdviceRequest);
+  //      return routingService.routeAdviceFor(routeAdviceRequest);
+        return routeAdviceRequest;
     }    
 }

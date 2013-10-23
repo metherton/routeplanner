@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,6 @@ public class RouteAdviceRequestDaoImpl implements RouteAdviceRequestDao {
   //  @Override
     public void storeRouteAdviceRequest(RouteAdviceRequest routeAdviceRequest) {
         currentSession().merge(routeAdviceRequest);
-        
     }
 
     private Session currentSession() {
@@ -38,7 +38,11 @@ public class RouteAdviceRequestDaoImpl implements RouteAdviceRequestDao {
 
 	@Override
 	public List<RouteAdviceRequest> findAllRouteAdviceRequests() {
-		List<RouteAdviceRequest> results = (List<RouteAdviceRequest>)currentSession().createCriteria(RouteAdviceRequest.class).list();
+		List<RouteAdviceRequest> results = (List<RouteAdviceRequest>)currentSession()
+		                                    .createCriteria(RouteAdviceRequest.class)
+		              //                      .setProjection( Projections.alias( Projections.rowCount(), "rowCount" ) )
+		                                    .list();
+//		List<RouteAdviceRequest> results = (List<RouteAdviceRequest>)currentSession().createCriteria(RouteAdviceRequest.class).list();
 		return results;
 	}    
     

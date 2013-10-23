@@ -26,8 +26,8 @@ public class RouteAdviceLeg implements Serializable {
     private Long id;
     
     @ManyToOne
-    @JoinColumn(name = "route_advice_id", nullable = false, updatable = false)
-    private RouteAdvice routeAdvice;
+    @JoinColumn(name = "route_request_id", nullable = false, updatable = false)
+    private RouteAdviceRequest routeAdviceRequest;
     
     @Column(name="location", columnDefinition = "char")
     @Size(min=1, max=20, message = "The first name must be between 1 and 20 characters long.")
@@ -44,12 +44,12 @@ public class RouteAdviceLeg implements Serializable {
         this.id = id;
     }
 
-    public RouteAdvice getRouteAdvice() {
-        return routeAdvice;
+    public RouteAdviceRequest getRouteAdviceRequest() {
+        return routeAdviceRequest;
     }
 
-    public void setRouteAdvice(RouteAdvice routeAdvice) {
-        this.routeAdvice = routeAdvice;
+    public void setRouteAdviceRequest(RouteAdviceRequest routeAdviceRequest) {
+        this.routeAdviceRequest = routeAdviceRequest;
     }    
 
     public int getSortOrder() {

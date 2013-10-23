@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.model.DataModel;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
@@ -17,23 +16,22 @@ import org.springframework.stereotype.Service;
 import com.bmtargoss.semafors.optimizer.domain.OptimalRouteAdvice;
 import com.bmtargoss.semafors.optimizer.domain.OptimalRouteAdviceRequest;
 import com.bmtargoss.semafors.optimizer.domain.OptimizerService;
-import com.martinetherton.routing.persistence.RouteAdviceDao;
 import com.martinetherton.routing.persistence.RouteAdviceRequestDao;
 
 @Service("routingService")
 public class RoutingServiceImpl implements RoutingService, Serializable {
 
     private RouteAdviceRequestDao routeAdviceRequestDao;
-    private RouteAdviceDao routeAdviceDao;
+//    private RouteAdviceDao routeAdviceDao;
     private JmsTemplate jmsTemplate;
     private OptimizerService optimizerService;
 
     @Autowired
-    public RoutingServiceImpl(RouteAdviceRequestDao routeAdviceRequestDao, JmsTemplate jmsTemplate, OptimizerService optimizerService, RouteAdviceDao routeAdviceDao) {
+    public RoutingServiceImpl(RouteAdviceRequestDao routeAdviceRequestDao, JmsTemplate jmsTemplate, OptimizerService optimizerService) {
         this.routeAdviceRequestDao = routeAdviceRequestDao;
         this.jmsTemplate = jmsTemplate;
         this.optimizerService = optimizerService;
-        this.routeAdviceDao = routeAdviceDao;
+//        this.routeAdviceDao = routeAdviceDao;
     }
 
     public void triggerRouteAdviceCreationFor(final RouteAdviceRequest routeAdviceRequest) {
@@ -52,24 +50,26 @@ public class RoutingServiceImpl implements RoutingService, Serializable {
         return routeAdviceRequestDao.findRouteAdviceRequestWithId(id);
     }
 
-    private RouteAdvice optimalRouteAdviceFor(
+    private RouteAdviceRequest optimalRouteAdviceFor(
             RouteAdviceRequest routeAdviceRequest) {
         OptimalRouteAdvice optimalRouteAdvice = optimalRouteAdviceFrom(routeAdviceRequest);
-        RouteAdvice routeAdvice = new RouteAdvice.Builder().routeAdviceRequest(routeAdviceRequest)
-                .start(locationFrom(routeAdviceRequest.getStartLatitude(), routeAdviceRequest.getStartLongitude()))
-                .destination(locationFrom(routeAdviceRequest.getDestinationLatitude(), routeAdviceRequest.getDestinationLongitude())).build();
-        List<RouteAdviceLeg> raLegs = getRouteAdviceLegsFrom(optimalRouteAdvice, routeAdvice);
-        routeAdvice.setRouteAdviceLegs(raLegs);
-        return routeAdvice;
+//        RouteAdvice routeAdvice = new RouteAdvice.Builder().routeAdviceRequest(routeAdviceRequest)
+//                .start(locationFrom(routeAdviceRequest.getStartLatitude(), routeAdviceRequest.getStartLongitude()))
+//                .destination(locationFrom(routeAdviceRequest.getDestinationLatitude(), routeAdviceRequest.getDestinationLongitude())).build();
+        List<RouteAdviceLeg> raLegs = getRouteAdviceLegsFrom(optimalRouteAdvice, routeAdviceRequest);
+   //     routeAdvice.setRouteAdviceLegs(raLegs);
+        routeAdviceRequest.setRouteAdviceLegs(raLegs);
+        routeAdviceRequest.setStatus(1);
+        return routeAdviceRequest;
     }
 
     private List<RouteAdviceLeg> getRouteAdviceLegsFrom(
-            OptimalRouteAdvice optimalRouteAdvice, RouteAdvice routeAdvice) {
+            OptimalRouteAdvice optimalRouteAdvice, RouteAdviceRequest routeAdviceRequest) {
         List<RouteAdviceLeg> routeAdviceLegs = new ArrayList<RouteAdviceLeg>();
         int sortOrder = 1;
         for (String waypoint : optimalRouteAdvice.waypoints()) {
             RouteAdviceLeg leg = new RouteAdviceLeg();
-            leg.setRouteAdvice(routeAdvice);
+            leg.setRouteAdviceRequest(routeAdviceRequest);
             leg.setLocation(waypoint);
             leg.setSortOrder(sortOrder);
             sortOrder++;
@@ -91,21 +91,22 @@ public class RoutingServiceImpl implements RoutingService, Serializable {
         return longitude + "_" + latitude;
     }
 
-    @Override
-    public RouteAdvice routeAdviceFor(RouteAdviceRequest routeAdviceRequest) {
-        RouteAdvice routeAdvice = routeAdviceDao.findRouteAdviceFor(routeAdviceRequest);
-        return routeAdvice;
-    }
+//    @Override
+//    public RouteAdvice routeAdviceFor(RouteAdviceRequest routeAdviceRequest) {
+//        RouteAdvice routeAdvice = routeAdviceDao.findRouteAdviceFor(routeAdviceRequest);
+//        return routeAdvice;
+//    }
 
 	@Override
 	public List<RouteAdviceRequest> findAllRouteAdviceRequests() {
 	    List<RouteAdviceRequest> results = routeAdviceRequestDao.findAllRouteAdviceRequests();
+	    System.out.println(results);
 		return results;
 	}
 
     @Override
     public void requestRouteAdviceFor(Long id) {
-        routeAdviceDao.storeRouteAdvice(optimalRouteAdviceFor(getStoredRouteAdviceRequestFor(id)));
+        routeAdviceRequestDao.storeRouteAdviceRequest(optimalRouteAdviceFor(getStoredRouteAdviceRequestFor(id)));
     }
 
 

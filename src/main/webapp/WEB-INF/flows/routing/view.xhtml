@@ -46,6 +46,7 @@
                         <f:facet name="header">Route Advice Request Id</f:facet>
                         #{route_request.id}
                     </p:column>
+ 
                     <p:column>
                         <f:facet name="header">Start Latitude</f:facet>
                         #{route_request.startLatitude}
@@ -61,11 +62,16 @@
                     <p:column>
                         <f:facet name="header">Destination Longitude</f:facet>
                         #{route_request.destinationLongitude}
-                    </p:column>                                                                            
+                    </p:column>   
+                    <p:column>
+                        <f:facet name="header">Advice Ready</f:facet>
+                        #{route_request.status}
+                    </p:column>                                                                                         
+                       
 				</p:dataTable>
 			</p:outputPanel>
             </h:panelGroup>
-            <p:poll widgetVar="routing" interval="600" update="contentPanel" autoStart="true" />
+            <p:poll widgetVar="routing" interval="5" update="contentPanel" autoStart="true" />
 		</h:form>			  
 	</p:panel>	
  

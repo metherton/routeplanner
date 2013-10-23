@@ -11,7 +11,7 @@ public interface RoutingService {
 
     public void requestRouteAdviceFor(Long id);
 
-    public RouteAdvice routeAdviceFor(RouteAdviceRequest routeAdviceRequest);
+ //   public RouteAdvice routeAdviceFor(RouteAdviceRequest routeAdviceRequest);
     
     public List<RouteAdviceRequest> findAllRouteAdviceRequests();
 
